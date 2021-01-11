@@ -1,0 +1,28 @@
+html
+    head
+        title Users
+    body#body
+        a(href="/") Home
+        |
+        |
+        a(href="/publicImages") View Public Images
+        |
+        |
+        a(href="/users") Show users
+        |
+        |
+        a(href="/login") Login
+        |
+        |
+        a(href="/logout") Logout
+        |
+        |
+        a(href="/profile") Profile
+        br
+        | Title: !{title}
+        br
+        | Tags: !{tags}
+        br
+
+        img(id="image", imageId = image, src= "/uploads/"+image+".png" , alt='some image')
+

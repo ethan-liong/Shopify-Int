@@ -1,0 +1,35 @@
+html
+    head
+        title Picture
+        style
+            include ../../public/css/styles.css
+        script(src="/js/publicImages.js")
+    body
+        a(href="/") Home
+        |
+        |
+        a(href="/publicImages") View Public Images
+        |
+        |
+        a(href="/users") Show users
+        |
+        |
+        a(href="/login") Login
+        |
+        |
+        a(href="/logout") Logout
+        |
+        |
+        a(href="/profile") Profile
+        br
+        p= "Search and seperate tags with a comma"
+            br
+            input(type='text', id='searchQ')
+            button(onclick = "search()") search
+        br
+        div(style = {display:'inline-flex', "flex-wrap":'wrap'})
+            for image in images
+                a(href="/profile/"+image._id, class = "imgWrapper")
+                    h4!= image.title
+                    br
+                    img(src= "/uploads/"+image._id+".png")

@@ -1,0 +1,44 @@
+html
+    head
+        title Users
+        script(src="/js/profile.js")
+    body#body
+        a(href="/") Home
+        |
+        |
+        a(href="/publicImages") View Public Images
+        |
+        |
+        a(href="/users") Show users
+        |
+        |
+        a(href="/login") Login
+        |
+        |
+        a(href="/logout") Logout
+        |
+        |
+        a(href="/profile") Profile
+        br
+        | Title: !{title}
+        br
+        | Tags: !{tags}
+        br
+        | Privacy !{privacy}
+        button(onclick = "changePriv()") Flip Privacy Setting
+        br
+        button(onclick = "deleteImage()") Delete Image
+        br
+        div
+            p= "Modify title/tag"
+            | title:
+            input(type='text', id='title')
+            br
+            | tags: 
+            input(type='text', id='tags')
+            br
+            button(onclick = "changeInfo()") Submit Changes
+        br
+        img(id="image", imageId = image, privacySetting = ''+privacy, src= "/uploads/"+image+".png" , alt='some image')
+        
+   

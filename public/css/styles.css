@@ -1,0 +1,19 @@
+.imgWrapper{
+    display: grid;
+    width:33%;
+    max-width: 33%;
+    max-height: 33%;
+    border: solid 1px black;
+    text-align: center;
+}
+
+.imgWrapper h4{
+    width: 100%;
+    min-width: 100%;
+}
+
+.imgWrapper img{
+    grid-row: 2;
+    max-width: 100%;
+    justify-self: center;
+}
