@@ -22,7 +22,7 @@ function deleteImage() {
         }
     };
     let id = (document.getElementById("image")).getAttribute("imageId");
-    req.open("POST", "/deleteImage");
+    req.open("DELETE", "/deleteImage");
     req.setRequestHeader("Content-Type", "application/json");
     req.send(JSON.stringify({ id: id}));
 }

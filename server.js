@@ -266,7 +266,7 @@ app.post('/newacc', function (req, res, next) {
 
 
 //handles the deletion of image
-app.post('/deleteImage', function (req, res, next) {
+app.delete('/deleteImage', function (req, res, next) {
     //find the person in the database and change its privacy value
     Image.findOneAndDelete({ _id: req.body.id }, function (err, item) {
         if (err) {
