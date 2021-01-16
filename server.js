@@ -21,7 +21,6 @@ const storage = multer.diskStorage({
                 callback(null, image._id + "." + ext[ext.length - 1]);
             });
         });
-
     }
 });
 
@@ -169,7 +168,7 @@ app.get("/publicImages", function (req, res, next) {
         query.push({ tags: { $regex: ".*?" } })
     }
     console.log(query)
-    Image.find({ privacy: false, $and: query }, { _id: 1 }, function (err2, images) {
+    Image.find({ privacy: false, $and: query }, { _id: 1, title: 1 }, function (err2, images) {
         if(err2){
             console.log(err2)
         }
