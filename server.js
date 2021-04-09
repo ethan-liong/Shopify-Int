@@ -222,7 +222,6 @@ app.post("/uploadImage", function (req, res, next) {
     });
 });
 
-
 //handles the login page
 app.post('/login', function (req, res, next) {
     let username = req.body.username;
@@ -248,7 +247,6 @@ app.post('/login', function (req, res, next) {
     });
 });
 
-
 //Tries to create a new user account
 app.post('/newacc', function (req, res, next) {
     let user = new User({ "username": req.body.username, "password": req.body.password, "privacy": false })
@@ -263,19 +261,17 @@ app.post('/newacc', function (req, res, next) {
     });
 });
 
-
 //handles the deletion of image
 app.delete('/deleteImage', function (req, res, next) {
     //find the person in the database and change its privacy value
-    Image.findOneAndDelete({ _id: req.body.id }, function (err, item) {
+    Image.findOneAndDelete({ _id: req.body.id, owner: req.userid}, function (err, item) {
         if (err) {
 
-        } else {
+        } else if (item != NULL){
             fs.unlink("uploads/" + req.body.id + ".png", (err) => res.status(200).send());
         }
     });
 });
-
 
 //handles modifies 
 app.post('/modifyImageData', function (req, res, next) {
@@ -286,7 +282,6 @@ app.post('/modifyImageData', function (req, res, next) {
         tags: req.body.tags
     }, () => res.status(200).send());
 });
-
 
 //Connect to database
 mongoose.connect('mongodb://localhost/imagerepo', { useNewUrlParser: true, useUnifiedTopology: true });
