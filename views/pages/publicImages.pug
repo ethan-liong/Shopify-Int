@@ -9,17 +9,6 @@ html
         |
         |
         a(href="/publicImages") View Public Images
-        |
-        |
-        a(href="/users") Show users
-        |
-        |
-        a(href="/login") Login
-        |
-        |
-        a(href="/logout") Logout
-        |
-        |
         a(href="/profile") Profile
         br
         p= "Search and seperate tags with a comma"
@@ -32,4 +21,4 @@ html
                 a(href="/profile/"+image._id, class = "imgWrapper")
                     h4!= image.title
                     br
-                    img(src= "/uploads/"+image._id+".png")
+                    img(src= "/uploads/" + image._id + "." + image.type)

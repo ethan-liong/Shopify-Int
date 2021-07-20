@@ -9,23 +9,11 @@ html
         a(href="/publicImages") View Public Images
         |
         |
-        a(href="/users") Show users
-        |
-        |
-        a(href="/login") Login
-        |
-        |
-        a(href="/logout") Logout
-        |
-        |
         a(href="/profile") Profile
         br
         | Title: !{title}
         br
         | Tags: !{tags}
-        br
-        | Privacy !{privacy}
-        button(onclick = "changePriv()") Flip Privacy Setting
         br
         button(onclick = "deleteImage()") Delete Image
         br
@@ -39,6 +27,6 @@ html
             br
             button(onclick = "changeInfo()") Submit Changes
         br
-        img(id="image", imageId = image, privacySetting = ''+privacy, src= "/uploads/"+image+".png" , alt='some image')
+        img(id="image", imageId = image, privacySetting = ''+privacy, src= "/uploads/"+image+"."+type, alt='some image')
         
    
