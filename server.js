@@ -140,8 +140,8 @@ app.delete('/deleteImage', function (req, res, next) {
     //find the person in the database and change its privacy value
     Image.findOneAndDelete({ _id: req.body.id }, function (err, item) {
         if (err) {
-        } else if (item != NULL) {
-            fs.unlink("uploads/" + req.body.id + item.type, (err) => res.status(200).send());
+        } else if (item != null) {
+            fs.unlink("uploads/" + req.body.id + "." + item.type, (err) => res.status(200).send());
         }
     });
 });

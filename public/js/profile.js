@@ -18,7 +18,7 @@ function deleteImage() {
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if (this.readyState === 4) {
-            window.location = "/profile"
+            window.location = "/publicImages"
         }
     };
     let id = (document.getElementById("image")).getAttribute("imageId");
