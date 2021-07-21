@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, callback) {
         let ext = file.mimetype.split('/');
-        console.log(ext[ext.length - 1])
         let img = new Image({ "title": req.body.title, "type": ext[ext.length - 1], "privacy": false, "tags": req.body.tags })
         img.save(function (err, image) {
             callback(null, image._id + "." + ext[ext.length - 1]);
@@ -25,7 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage
-}).array("photo", 10)
+}).array("photo", 100)
 
 app.set("view engine", "pug");
 app.use(express.static("public", { strict: true }));
@@ -54,7 +53,6 @@ app.get("/uploads/:id", function (req, res, next) {
     Image.findOne({ _id: req.params.id.split(".")[0] }, function (err1, img) {
         if (err1) {
         }
-        console.log(img)
         res.sendFile(__dirname + "/uploads/" + req.params.id)
     });
 });
@@ -91,12 +89,10 @@ app.get("/publicImages", function (req, res, next) {
     } else {
         query.push({ tags: { $regex: ".*?" } })
     }
-    console.log(query)
     Image.find({ privacy: false, $and: query }, function (err2, images) {
         if (err2) {
             console.log(err2)
         }
-        console.log(images)
         if (images) {
             res.status(200).render("pages/publicImages", { images: images });
         } else {
@@ -133,7 +129,7 @@ app.post("/uploadImage", function (req, res, next) {
 //handles the login page
 app.post('/login', function (req, res, next) {
     let password = req.body.password;
-    if (password === "PASSWORDHERE") {
+    if (password === "123") {
         req.session.loggedin = true;
         res.redirect("/publicImages");
     }
@@ -144,9 +140,8 @@ app.delete('/deleteImage', function (req, res, next) {
     //find the person in the database and change its privacy value
     Image.findOneAndDelete({ _id: req.body.id }, function (err, item) {
         if (err) {
-
         } else if (item != NULL) {
-            fs.unlink("uploads/" + req.body.id + ".png", (err) => res.status(200).send());
+            fs.unlink("uploads/" + req.body.id + item.type, (err) => res.status(200).send());
         }
     });
 });
@@ -154,7 +149,6 @@ app.delete('/deleteImage', function (req, res, next) {
 //handles modifies 
 app.post('/modifyImageData', function (req, res, next) {
     //find the person in the database and change its privacy value
-    console.log(req.body)
     Image.updateOne({ _id: req.body.id }, {
         title: req.body.title,
         tags: req.body.tags
@@ -166,6 +160,6 @@ mongoose.connect('mongodb://localhost/imagerepo', { useNewUrlParser: true, useUn
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    app.listen(3000);
-    console.log("Server listening on port 3000");
+    app.listen(80);
+    console.log("Server listening on port 80");
 });
